@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "7P+YyhJ5kfM=",
+  "dgSpecHash": "3eLx761WOq0=",
   "success": true,
   "projectFilePath": "C:\\Users\\brota\\RiderProjects\\TIFour\\TIFour\\TIFour.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\brota\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.2\\microsoft.netcore.app.runtime.win-x64.9.0.2.nupkg.sha512",
+    "C:\\Users\\brota\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.2\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.2.nupkg.sha512",
+    "C:\\Users\\brota\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.2\\microsoft.aspnetcore.app.runtime.win-x64.9.0.2.nupkg.sha512"
+  ],
   "logs": []
 }
