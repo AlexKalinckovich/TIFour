@@ -1,0 +1,85 @@
+﻿<Window x:Class="TIFour.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TIFour"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <GroupBox Header="Параметры ключей" Margin="0,0,0,10">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="p:" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="TxtP" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="q:" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="TxtQ" />
+
+                <Label Grid.Row="2" Grid.Column="0" Name="DLabel" Content="d:" VerticalAlignment="Center"/>
+                <Label Grid.Row="3" Grid.Column="0" Name="ELabel" Content="e:" VerticalAlignment="Center"/>
+            </Grid>
+            </GroupBox>
+            
+            <GroupBox Header="Подписание сообщения" Margin="0,0,0,10">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Grid.Column="0" Name="BtnSelectMessage" Content="Выбрать файл" Click="btnSelectMessage_Click"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="TxtMessagePath" IsReadOnly="True" Margin="5,0"/>
+
+                    <Button Grid.Row="1" Grid.Column="0" Name="BtnComputeHash" Content="Вычислить хеш" Click="btnComputeHash_Click"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Name="TxtHash" IsReadOnly="True" Margin="5,0"/>
+
+                    <Button Grid.Row="2" Grid.Column="0" Name="BtnSign" Content="Создать подпись" Click="btnSign_Click"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Name="TxtSignature" IsReadOnly="True" Margin="5,0"/>
+
+                    <Button Grid.Row="3" Grid.Column="0" Name="BtnSaveSignedMessage" Content="Сохранить сообщение с подписью" Click="btnSaveSignedMessage_Click"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Проверка подписи">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="e:" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="ETxt" Margin="5,0" />
+
+                    <Button Grid.Row="1" Grid.Column="0" Name="BtnSelectSignedMessage" Content="Выбрать подписанный файл" Click="btnSelectSignedMessage_Click"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Name="TxtSignedMessagePath" IsReadOnly="True" Margin="5,0"/>
+
+                    <Button Grid.Row="2" Grid.Column="0" Name="BtnVerifySignature" Content="Проверить подпись" Click="btnVerifySignature_Click"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Name="TxtVerifyResult" IsReadOnly="True" TextWrapping="Wrap" Margin="5,0"/>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</Window>
