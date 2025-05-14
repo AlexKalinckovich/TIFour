@@ -39,7 +39,7 @@ public static class FileService
         return path;
     }
 
-    /// <summary>
+     /// <summary>
     /// Сохраняет подписанное сообщение, сохраняя исходную кодировку (BOM) и добавляя разделитель+подпись.
     /// </summary>
     public static void SaveSignedMessage(in string originalPath, in BigInteger signature)
@@ -56,14 +56,26 @@ public static class FileService
         string savePath = dlg.FileName;
 
         using FileStream fsIn = new FileStream(originalPath, FileMode.Open, FileAccess.Read, FileShare.Read);
-        using StreamReader reader = new StreamReader(fsIn, Encoding.UTF8, detectEncodingFromByteOrderMarks: true, IoBufferSize, leaveOpen: true);
+
+        byte[] bomBuffer = new byte[3];
+        int bytesRead = fsIn.Read(bomBuffer, 0, 3);
+        bool hasUtf8Bom = (bytesRead >= 3) && (bomBuffer[0] == 0xEF && bomBuffer[1] == 0xBB && bomBuffer[2] == 0xBF);
+            
+        fsIn.Position = 0;
+
+        using StreamReader reader = new StreamReader(fsIn, Encoding.UTF8, detectEncodingFromByteOrderMarks: true, bufferSize: IoBufferSize, leaveOpen: true);
         
-        reader.Peek(); // force BOM detection
+        reader.Peek(); // Для определенияя кодировки через reader. CurrentEncoding
         Encoding enc = reader.CurrentEncoding;
 
-        using FileStream fsOut = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None);
-        using StreamWriter writer = new StreamWriter(fsOut, enc, IoBufferSize, leaveOpen: false);
+        if (enc is UTF8Encoding)
+        {
+            enc = new UTF8Encoding(hasUtf8Bom);
+        }
 
+        using FileStream fsOut = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None);
+        using StreamWriter writer = new StreamWriter(fsOut, enc, bufferSize: IoBufferSize, leaveOpen: false);
+        
         char[] buf = new char[IoBufferSize];
         int read;
         while ((read = reader.Read(buf, 0, buf.Length)) > 0)
@@ -80,9 +92,9 @@ public static class FileService
     public static (BigInteger ContentHash, BigInteger Signature) LoadSignedMessage(
         in string signedFilePath, in BigInteger p, in BigInteger q)
     {
-        using var fs = new FileStream(signedFilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+        using FileStream fs = new FileStream(signedFilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
 
-        using var bomReader = new StreamReader(
+        using StreamReader bomReader = new StreamReader(
             fs, 
             Encoding.UTF8,
             detectEncodingFromByteOrderMarks: true, 

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\RiderProjects\\TIFour\\TIFour\\TIFour.csproj",
+      "projectUniqueName": "C:\\Users\\brota\\RiderProjects\\TIFour\\TIFour\\TIFour.csproj",
       "projectName": "TIFour",
-      "projectPath": "E:\\RiderProjects\\TIFour\\TIFour\\TIFour.csproj",
+      "projectPath": "C:\\Users\\brota\\RiderProjects\\TIFour\\TIFour\\TIFour.csproj",
       "packagesPath": "C:\\Users\\brota\\.nuget\\packages\\",
-      "outputPath": "E:\\RiderProjects\\TIFour\\TIFour\\obj\\",
+      "outputPath": "C:\\Users\\brota\\RiderProjects\\TIFour\\TIFour\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\brota\\AppData\\Roaming\\NuGet\\NuGet.Config"

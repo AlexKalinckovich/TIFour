@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Numerics;
+using System.Text;
 using TIFour.Utils;
 
 namespace TIFour.Services;
@@ -27,7 +28,7 @@ public static class HashService
         return ComputeByteStreamHash(stream, n);
     }
 
-    public static BigInteger ComputeByteStreamHash(in Stream stream, in BigInteger modulus)
+    private static BigInteger ComputeByteStreamHash(in Stream stream, in BigInteger modulus)
     {
         BigInteger currentHash = InitialHash;
         
@@ -50,7 +51,11 @@ public static class HashService
     /// Вычисляет хеш первых <paramref name="length"/> байт потока по блочному алгоритму.
     /// </summary>
     public static BigInteger ComputeHashWithOffset(
-        in FileStream fs, long offset, long length, in BigInteger p, in BigInteger q) 
+        in FileStream fs, 
+        long offset, 
+        long length, 
+        in BigInteger p, 
+        in BigInteger q) 
     {
         fs.Seek(offset, SeekOrigin.Begin);
         BigInteger mod = p * q;
@@ -62,6 +67,7 @@ public static class HashService
         {
             int toRead = (int)Math.Min(buffer.Length, remaining);
             int read = fs.Read(buffer, 0, toRead);
+            
             if (read <= 0) break;
 
             for (int i = 0; i < read; i++)
